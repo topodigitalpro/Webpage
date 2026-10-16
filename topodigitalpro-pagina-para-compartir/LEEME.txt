@@ -1,0 +1,7 @@
+TopoDigitalPro — página web para compartir
+
+1. Descomprime este ZIP.
+2. Abre index.html para ver la página principal.
+3. blog.html contiene el blog y se abre desde el menú de la página.
+
+Las imágenes están incluidas. Para usar PayPal, WhatsApp, YouTube y TikTok se necesita conexión a internet.
