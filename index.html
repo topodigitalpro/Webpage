@@ -137,7 +137,8 @@ var PAYPAL="https://www.paypal.com/ncp/payment/4XB9SN9JW5T9J";
 var respuestas=[
  {k:["oferta","colombia","cop","pesos","nequi","bancolombia"],t:"Para Colombia hay una oferta de $70.000 COP (pago único). Se gestiona por WhatsApp: <a href='"+wa("Hola, quiero la oferta Colombia de TopoDigitalPro por $70.000 COP")+"' target='_blank' rel='noopener'>pedir la oferta</a>."},
  {k:["precio","cuesta","cuanto","vale","costo","valor","pagar","pago","comprar","paypal","tarjeta"],t:"La licencia completa cuesta <b>US$30</b>, pago único y sin mensualidades, por <a href='"+PAYPAL+"' target='_blank' rel='noopener'>PayPal</a>. Si estás en Colombia, pregunta por la oferta de $70.000 COP."},
- {k:["version de prueba","prueba","gratis","demo","probar","trial","descargar","descarga"],t:"Puedes probarlo <b>3 días gratis</b>, sin crear cuenta. Solo necesitas AutoCAD o Civil 3D instalado. Usa el botón «Prueba gratis 3 días» al inicio de la página."},
+ {k:["descarga","descargar","enlace","link","instalador","instalar","instalacion","bajar","download","obtener"],t:"Aquí puedes descargar el instalador de la prueba gratis de 3 días: <a href='https://github.com/topodigitalpro/mi-app-updates/releases' target='_blank' rel='noopener'>Descargar TopoDigitalPro ↗</a>. Se descarga desde GitHub; requiere AutoCAD o Civil 3D instalado. Para controlar los 3 días, el programa registra el Hardware ID del equipo y la fecha de inicio (ver <a href='https://github.com/topodigitalpro/mi-app-updates/blob/main/PRIVACY.md' target='_blank' rel='noopener'>política de privacidad</a>)."},
+ {k:["version de prueba","prueba","gratis","demo","probar","trial"],t:"Puedes probarlo <b>3 días gratis</b>, sin crear cuenta. Solo necesitas AutoCAD o Civil 3D instalado. Descarga el instalador aquí: <a href='https://github.com/topodigitalpro/mi-app-updates/releases' target='_blank' rel='noopener'>Descargar TopoDigitalPro ↗</a>."},
  {k:["activ","codigo","licencia","hardware","hwid"],t:"Después de pagar, copia el <b>Hardware ID</b> que muestra el programa y completa la <a href='#activar'>solicitud de activación</a>. Se abre WhatsApp con el mensaje listo; verificamos el pago y te enviamos el código manualmente."},
  {k:["computador","pc","equipo nuevo","cambio","cambiar","otro computador","formatear"],t:"Si cambias de computador, solicita un nuevo código de activación. Al entregarlo, el código anterior se anula."},
  {k:["version","autocad","civil","windows","compatible","compatibilidad","2018","2027","requisitos"],t:"Es compatible con <b>AutoCAD y Civil 3D 2018–2027</b> en Windows 10 y 11."},
@@ -149,7 +150,7 @@ var respuestas=[
  {k:["soporte","ayuda","contacto","whatsapp","hablar","asesor","persona"],t:"Escríbenos por <a href='"+WA+"' target='_blank' rel='noopener'>WhatsApp</a> y te ayudamos con soporte o dudas."},
  {k:["hola","buenas","buenos","saludos","hey"],t:"¡Hola! Soy el asistente de TopoDigitalPro. Elige un tema o escribe tu pregunta."}
 ];
-var sugeridas=[["Precio","precio"],["Prueba gratis","prueba gratis"],["Activación","activar licencia"],["Compatibilidad","compatibilidad"],["¿Qué incluye?","que hace"],["Oferta Colombia","oferta colombia"]];
+var sugeridas=[["Precio","precio"],["Prueba gratis","prueba gratis"],["Descargar","descargar instalador"],["Activación","activar licencia"],["Compatibilidad","compatibilidad"],["¿Qué incluye?","que hace"],["Oferta Colombia","oferta colombia"]];
 function norm(t){return t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");}
 function agregar(clase,contenido,esHtml){var d=document.createElement("div");d.className="bot-msg "+clase;if(esHtml)d.innerHTML=contenido;else d.textContent=contenido;log.appendChild(d);log.scrollTop=log.scrollHeight;}
 function responder(txt){
