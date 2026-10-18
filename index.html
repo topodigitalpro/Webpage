@@ -73,6 +73,29 @@ section[style*="background:#eaf2f0"]{background:#f1f2e9!important}
 body{padding-bottom:40px}
 .whatsapp-float{bottom:52px}
 @media(max-width:560px){.dock{gap:0;padding-left:4px;padding-right:4px}.dock a{width:29px;height:34px}.dock svg{width:18px;height:18px}.dock-sep{margin:0 3px}.dock-count{padding:0 3px;gap:4px;font-size:11px}.dock-count svg{width:18px;height:18px}.whatsapp-float{bottom:48px}}
+</style><style>
+.bot-launch{position:fixed;left:13px;bottom:52px;z-index:45;display:flex;align-items:center;gap:8px;padding:11px 15px;border:0;border-radius:999px;background:#087d8b;color:#fff;font:inherit;font-size:12px;font-weight:750;cursor:pointer;box-shadow:0 10px 28px #08323d40}
+.bot-launch:hover{background:#066673}
+.bot-launch:focus-visible,.bot-panel button:focus-visible{outline:3px solid #102e39;outline-offset:2px}
+.bot-launch svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.bot-panel{position:fixed;left:13px;bottom:108px;z-index:46;width:min(340px,calc(100vw - 26px));max-height:min(520px,calc(100vh - 150px));display:flex;flex-direction:column;background:#fff;border:1px solid #d5e4e2;border-radius:16px;box-shadow:0 20px 50px #08323d33;overflow:hidden;font-size:13px;color:#102e39}
+.bot-panel[hidden]{display:none}
+.bot-panel header{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;background:linear-gradient(125deg,#092d3b,#0d4958);color:#fff}
+.bot-panel header strong{display:block;font-size:14px}
+.bot-panel header small{font-size:11px;color:#cfe6e8}
+.bot-panel header button{border:0;background:transparent;color:#fff;font-size:24px;line-height:1;cursor:pointer;padding:0 4px}
+.bot-log{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;background:#f4f8f7;min-height:140px}
+.bot-msg{max-width:88%;padding:9px 11px;border-radius:12px;line-height:1.5;overflow-wrap:anywhere}
+.bot-msg.bot{align-self:flex-start;background:#fff;border:1px solid #dbe7e5}
+.bot-msg.me{align-self:flex-end;background:#087d8b;color:#fff}
+.bot-msg a{color:#087d8b;text-decoration:underline;font-weight:700}
+.bot-chips{display:flex;flex-wrap:wrap;gap:6px;padding:8px 12px;border-top:1px solid #e3ecea;background:#fff}
+.bot-chips button{border:1px solid #bcd6d3;background:#f2f9f8;color:#0b5560;border-radius:999px;padding:6px 10px;font:inherit;font-size:12px;font-weight:700;cursor:pointer}
+.bot-chips button:hover{background:#dff3ef}
+.bot-form{display:flex;gap:8px;padding:10px 12px;border-top:1px solid #e3ecea;background:#fff}
+.bot-form input{flex:1;min-width:0;padding:9px 11px;border:1px solid #cfdcda;border-radius:9px;font:inherit;font-size:13px}
+.bot-form button{border:0;border-radius:9px;background:#087d8b;color:#fff;padding:0 14px;cursor:pointer;font-size:14px}
+@media(max-width:560px){.bot-launch{left:8px;bottom:48px;padding:10px 12px}.bot-launch span{display:none}.bot-panel{left:8px;bottom:100px}}
 </style></head>
 <body>
 <header class="wrap topbar"><a class="brand" href="#inicio"><img class="logo" src="logo-topodigitalpro.png" alt="TopoDigitalPro"></a><nav class="nav"><a href="index.html">Inicio</a><a href="blog.html">Blog</a><a href="#herramientas">Herramientas</a><a href="#como-funciona">Cómo funciona</a><a href="#preguntas">Preguntas</a><a class="btn primary small" href="#precios">Ver precios</a></nav></header>
@@ -99,7 +122,47 @@ function probar(i){
   var n=Number(d&&(d.value!==undefined?d.value:d.count));if(!isFinite(n))throw 0;mostrar(n);
  }).catch(function(){probar(i+1);});
 }
-probar(0);})();</script></body></html>
+probar(0);})();</script><button class="bot-launch" id="botLaunch" type="button" aria-label="Abrir asistente de preguntas" aria-expanded="false" aria-controls="botPanel"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.5-4.6A8 8 0 1 1 21 12z"/><path d="M8.5 11h.01M12 11h.01M15.5 11h.01"/></svg><span>Asistente</span></button>
+<section class="bot-panel" id="botPanel" role="dialog" aria-label="Asistente TopoDigitalPro" hidden><header><div><strong>Asistente TopoDigitalPro</strong><small>Respuestas rápidas a tus dudas</small></div><button type="button" id="botClose" aria-label="Cerrar asistente">×</button></header><div class="bot-log" id="botLog" aria-live="polite"></div><div class="bot-chips" id="botChips"></div><form class="bot-form" id="botForm" autocomplete="off"><input id="botInput" type="text" maxlength="200" placeholder="Escribe tu pregunta…" aria-label="Escribe tu pregunta"><button type="submit" aria-label="Enviar">➤</button></form></section><script>(function(){
+var launch=document.getElementById("botLaunch"),panel=document.getElementById("botPanel"),log=document.getElementById("botLog"),chips=document.getElementById("botChips"),form=document.getElementById("botForm"),input=document.getElementById("botInput");
+if(!launch||!panel)return;
+var WA="https://wa.me/573011727968";
+function wa(t){return WA+"?text="+encodeURIComponent(t);}
+var PAYPAL="https://www.paypal.com/ncp/payment/4XB9SN9JW5T9J";
+var respuestas=[
+ {k:["oferta","colombia","cop","pesos","nequi","bancolombia"],t:"Para Colombia hay una oferta de $70.000 COP (pago único). Se gestiona por WhatsApp: <a href='"+wa("Hola, quiero la oferta Colombia de TopoDigitalPro por $70.000 COP")+"' target='_blank' rel='noopener'>pedir la oferta</a>."},
+ {k:["precio","cuesta","cuanto","vale","costo","valor","pagar","pago","comprar","paypal","tarjeta"],t:"La licencia completa cuesta <b>US$30</b>, pago único y sin mensualidades, por <a href='"+PAYPAL+"' target='_blank' rel='noopener'>PayPal</a>. Si estás en Colombia, pregunta por la oferta de $70.000 COP."},
+ {k:["version de prueba","prueba","gratis","demo","probar","trial","descargar","descarga"],t:"Puedes probarlo <b>3 días gratis</b>, sin crear cuenta. Solo necesitas AutoCAD o Civil 3D instalado. Usa el botón «Prueba gratis 3 días» al inicio de la página."},
+ {k:["activ","codigo","licencia","hardware","hwid"],t:"Después de pagar, copia el <b>Hardware ID</b> que muestra el programa y completa la <a href='#activar'>solicitud de activación</a>. Se abre WhatsApp con el mensaje listo; verificamos el pago y te enviamos el código manualmente."},
+ {k:["computador","pc","equipo nuevo","cambio","cambiar","otro computador","formatear"],t:"Si cambias de computador, solicita un nuevo código de activación. Al entregarlo, el código anterior se anula."},
+ {k:["version","autocad","civil","windows","compatible","compatibilidad","2018","2027","requisitos"],t:"Es compatible con <b>AutoCAD y Civil 3D 2018–2027</b> en Windows 10 y 11."},
+ {k:["minuta","igac","snr","linderos","descripcion tecnica","informe","word"],t:"Genera la minuta y el informe en Word con la descripción técnica de linderos (formato IGAC-SNR), tabla de contenido, índices de tablas y figuras y los layouts anexados, tomando los datos de tu dibujo."},
+ {k:["lotiz","subdivi","parcela","predio","lote","manzana"],t:"Divide predios por áreas iguales, porcentajes, frente mínimo, frente más área o polígonos, con áreas, perímetros y sombreados automáticos. La subdivisión de manzanas aún está en desarrollo."},
+ {k:["que hace","herramientas","funciones","incluye","sirve","coordenadas","poligonal","layout","cajetin","kmz","google earth"],t:"Incluye lotización, cuadros de coordenadas, poligonales e informes, importación de puntos (CSV/TXT), layouts y cajetines, KMZ/Google Earth, curvas y diseño vial. Mira la sección «Herramientas» de la página."},
+ {k:["idioma","ingles","portugues","espanol"],t:"La interfaz está en español, inglés y portugués."},
+ {k:["actualiza","actualizacion"],t:"Las actualizaciones son automáticas; no tienes que configurar nada."},
+ {k:["soporte","ayuda","contacto","whatsapp","hablar","asesor","persona"],t:"Escríbenos por <a href='"+WA+"' target='_blank' rel='noopener'>WhatsApp</a> y te ayudamos con soporte o dudas."},
+ {k:["hola","buenas","buenos","saludos","hey"],t:"¡Hola! Soy el asistente de TopoDigitalPro. Elige un tema o escribe tu pregunta."}
+];
+var sugeridas=[["Precio","precio"],["Prueba gratis","prueba gratis"],["Activación","activar licencia"],["Compatibilidad","compatibilidad"],["¿Qué incluye?","que hace"],["Oferta Colombia","oferta colombia"]];
+function norm(t){return t.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"");}
+function agregar(clase,contenido,esHtml){var d=document.createElement("div");d.className="bot-msg "+clase;if(esHtml)d.innerHTML=contenido;else d.textContent=contenido;log.appendChild(d);log.scrollTop=log.scrollHeight;}
+function responder(txt){
+ var n=norm(txt),mejor=null,pts=0;
+ respuestas.forEach(function(r){var p=0;r.k.forEach(function(k){if(n.indexOf(k)>-1)p+=k.length;});if(p>pts){pts=p;mejor=r;}});
+ if(mejor)agregar("bot",mejor.t,true);
+ else agregar("bot","No tengo una respuesta para eso. Escríbenos por <a href='"+wa("Hola, tengo una pregunta sobre TopoDigitalPro: "+txt)+"' target='_blank' rel='noopener'>WhatsApp</a> y te ayudamos.",true);
+}
+function preguntar(txt,mostrar){agregar("me",mostrar||txt,false);setTimeout(function(){responder(txt);},250);}
+sugeridas.forEach(function(s){var b=document.createElement("button");b.type="button";b.textContent=s[0];b.addEventListener("click",function(){preguntar(s[1],s[0]);});chips.appendChild(b);});
+form.addEventListener("submit",function(e){e.preventDefault();var v=input.value.trim();if(!v)return;input.value="";preguntar(v);});
+var iniciado=false;
+function abrir(v){panel.hidden=!v;launch.setAttribute("aria-expanded",String(v));if(v){if(!iniciado){iniciado=true;agregar("bot","¡Hola! Soy el asistente de TopoDigitalPro. Elige un tema o escribe tu pregunta.",false);}input.focus();}}
+launch.addEventListener("click",function(){abrir(panel.hidden);});
+document.getElementById("botClose").addEventListener("click",function(){abrir(false);launch.focus();});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&!panel.hidden)abrir(false);});
+log.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a[href^='#']");if(a)abrir(false);});
+})();</script></body></html>
 
 
 
